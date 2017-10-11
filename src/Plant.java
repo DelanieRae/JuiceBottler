@@ -54,13 +54,13 @@ public class Plant implements Runnable {
 	public final int plantNum;
 	private volatile boolean timeToWork;
 	private volatile int orangesProcessed;
-
+	//creates worker threads
 	Plant(int plantNum) {
 		this.plantNum = plantNum;
 		workers = new Thread[NUM_WORKERS];
 		orangesProcessed = 0;
 	}
-
+	//Creates worker threads and starts the threads calling the run method
 	public void startPlant(int workNum) {
 		timeToWork = true;
 		for (int i = 0; i < NUM_WORKERS; i++) {
@@ -71,11 +71,13 @@ public class Plant implements Runnable {
 			workers[i].start();
 		}
 	}
-
+	
+	//sets timeToWork to false
 	public void stopPlant() {
 		timeToWork = false;
 	}
 
+	//waits for the previous worker thread to stop
 	public void waitToStop() {
 		for (Thread worker : workers) {
 			try {
