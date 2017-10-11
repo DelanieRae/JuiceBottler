@@ -42,7 +42,7 @@ public class Orange {
     	state = State.Fetched;
     	doWork();
     	}
-    //Does all steps besides the 
+    //Does all steps besides the peeled to squeezed
     public void runProcess() {
         // Don't attempt to process an already completed orange
         if (state == State.Processed) {
@@ -51,6 +51,7 @@ public class Orange {
         state = state.getNext();
         doWork();
     }
+    //Does peeled to squeezed
     public void runSqueezed() {
     	if (state == State.Processed) {
             throw new IllegalStateException("This orange has already been processed");
@@ -58,6 +59,7 @@ public class Orange {
         state = state.getNext();
         doWork();
     }
+    //Sleeps so the work can be done
     private void doWork() {
         // Sleep for the amount of time necessary to do the work
         try {
